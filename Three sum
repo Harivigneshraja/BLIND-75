@@ -1,0 +1,86 @@
+import java.util.*;
+public class Main {
+// Time limit exist
+//     public static List<List<Integer>> threeSum(int[] nums) {
+//         ArrayList<List<Integer>> list=new ArrayList<>();
+//         Arrays.sort(nums);
+//         for(int i=0;i<nums.length;i++)
+//         {
+//             for(int j=i+1;j<nums.length;j++)
+//             {
+//                 if(i!=j)
+//                 {
+//                 for(int k=j+1;k<nums.length;k++)
+//                 {
+//                     if( nums[i]+nums[j]+nums[k]==0&& j!=k)
+//                     {
+//                     if(!list.contains(Arrays.asList(nums[i],nums[j],nums[k])))
+//                     {
+//                         list.add(Arrays.asList(nums[i],nums[j],nums[k]));
+//                     }
+//                     }
+//                 }
+//                 }
+//             }
+//         }
+//         return list;
+//     }
+    public static List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        // Sort the array
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            // Skip duplicate elements for i
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int j = i + 1;
+            int k = nums.length - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+
+                if (sum == 0) {
+                    // Found a triplet with zero sum
+                    ans.add(Arrays.asList(nums[i], nums[j], nums[k]));
+
+                    // Skip duplicate elements for j
+                    while (j < k && nums[j] == nums[j + 1]) {
+                        j++;
+                    }
+
+                    // Skip duplicate elements for k
+                    while (j < k && nums[k] == nums[k - 1]) {
+                        k--;
+                    }
+
+                    // Move the pointers
+                    j++;
+                    k--;
+                } else if (sum < 0) {
+                    // Sum is less than zero, increment j to increase the sum
+                    j++;
+                } else {
+                    // Sum is greater than zero, decrement k to decrease the sum
+                    k--;
+                }
+            }
+        }
+        return ans;
+    }
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int res=threeSum(a);
+        System.out.println(res);
+    }
+}
