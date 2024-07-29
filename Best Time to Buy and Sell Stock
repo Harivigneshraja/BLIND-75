@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main {
+    public static int maxProfit(int[] price) {
+        int maxprofit=0;
+	   int n=price.length;
+       int min=price[0];
+	   for(int i=0;i<n;i++)
+	   {
+	       if(min>price[i])
+	       {
+	       min=price[i];
+	       }
+           if(price[i]-min>maxprofit)
+           maxprofit=price[i]-min;
+	   }
+	 return maxprofit;
+    }
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int res=maxProfit(a);
+        System.out.println(res);
+    }
+}
