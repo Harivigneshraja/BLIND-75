@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main {
+    public static int maxArea(int[] height) {
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        while (left < right) {
+            maxArea = Math.max(maxArea, (right - left) * Math.min(height[left], height[right]));
+
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;        
+    }
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int res=maxArea(a);
+        System.out.println(res);
+    }
+}
