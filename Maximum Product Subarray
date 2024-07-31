@@ -1,0 +1,48 @@
+import java.util.*;
+public class Main {
+    public static int maxProduct(int[] nums) {
+        // if(nums.length==1)
+        // return nums[0];
+        // int max=Integer.MIN_VALUE;
+        // int curr=1;
+        // for(int i=0;i<nums.length;i++)
+        // {
+        //     curr=curr*nums[i];
+        //     if(max<curr)
+        //     {
+        //         max=curr;
+        //     }
+        //     if(curr==0)
+        //     curr=1;
+            
+        // }
+        // return max;
+        double leftProduct = 1;
+        double rightProduct = 1;
+        double ans =  nums[0];
+        for(int i=0;i<nums.length;i++){
+            if(leftProduct==0){
+                leftProduct=1;
+            }
+            if(rightProduct==0){
+                rightProduct=1;
+            }
+            leftProduct = leftProduct * nums[i];
+            rightProduct = rightProduct * nums[nums.length-i-1];
+            ans  = Math.max(ans,Math.max(leftProduct,rightProduct));
+        }
+        return (int)ans;
+}
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int res=maxProduct(a);
+        System.out.println(res);
+    }
+}
